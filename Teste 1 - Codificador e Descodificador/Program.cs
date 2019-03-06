@@ -21,6 +21,37 @@ namespace Teste_1___Codificador_e_Descodificador
             matrizFrase = new char[frase.Length, frase.Length];
         }
         #endregion
+
+        #region Métodos
+        #region Primeira Etapa
+        private void criacaoMatriz()
+        {
+            //preenchimento da matriz
+            char[] encode = frase.ToCharArray();
+
+            for (int linha = 0; linha < matrizFrase.GetLength(0); linha++)
+            {
+                for (int coluna = 0; coluna < matrizFrase.GetLength(1); coluna++)
+                    matrizFrase[linha, coluna] = encode[coluna];
+                encode = shiftRightLogical(encode);
+            }
+        }
+        private char[] shiftRightLogical(char[] frase)
+        {
+            //envia o último caracter para a primeira posição da linha
+            char[] resposta = new char[frase.Length];
+            resposta[0] = frase[frase.Length - 1]; //o primeiro caracter, recebe o ultimo caracter
+
+            for (int coluna = 1; coluna < resposta.Length; coluna++)
+            {
+                resposta[coluna] = frase[coluna - 1];
+            }
+            return resposta;
+        }
+        #endregion
+
+        #endregion
+
     }
     class Decodificacao
     {
