@@ -9,36 +9,63 @@ namespace Teste_1___Codificador_e_Descodificador
 {
     class Matriz
     {
+        //Possui todos os atributos e métodos compartilhados pelas classes Codificacao e Descodificacao
+
+        #region Atributos
+        private char[,] matrizFrase;
+        #endregion
+
+        #region Getters e Setters
+        protected char[,] MatrizFrase
+        {
+            get { return matrizFrase; }
+            set { matrizFrase = value; }
+        }
+        #endregion
+
+        #region Construtor
+        public Matriz(string frase)
+        {
+            matrizFrase = new char[frase.Length, frase.Length];
+        }
+        public Matriz()
+        {
+
+        }
+        #endregion
+
         #region Métodos
 
+        protected virtual void criacaoMatriz()
+        {
+            //será implementado nas classes derivadas
+        }
         #endregion
     }
     class Codificacao: Matriz
     {
         #region Atributos
         public string frase;
-        private char[,] matrizFrase;
         #endregion
 
         #region Construtor
-        public Codificacao(string frase)
+        public Codificacao(string frase): base(frase)
         {
             this.frase = frase;
-            matrizFrase = new char[frase.Length, frase.Length];
         }
         #endregion
 
         #region Métodos
         #region Primeira Etapa
-        private void criacaoMatriz()
+        protected override void criacaoMatriz()
         {
-            //preenchimento da matriz
+            //preenchimento da matriz 
             char[] encode = frase.ToCharArray();
 
-            for (int linha = 0; linha < matrizFrase.GetLength(0); linha++)
+            for (int linha = 0; linha < MatrizFrase.GetLength(0); linha++)
             {
-                for (int coluna = 0; coluna < matrizFrase.GetLength(1); coluna++)
-                    matrizFrase[linha, coluna] = encode[coluna];
+                for (int coluna = 0; coluna < MatrizFrase.GetLength(1); coluna++)
+                    MatrizFrase[linha, coluna] = encode[coluna];
                 encode = shiftRightLogical(encode);
             }
         }
@@ -58,10 +85,10 @@ namespace Teste_1___Codificador_e_Descodificador
         #region Segunda Etapa
         private string retornaUltimaColuna()
         {
-            char[] teste = new char[matrizFrase.GetLength(0)];
+            char[] teste = new char[MatrizFrase.GetLength(0)];
 
-            for (int posicao = 0; posicao < matrizFrase.GetLength(1); posicao++) //Salva toda a ultima coluna em um vetor do tipo char
-                teste[posicao] = matrizFrase[posicao, matrizFrase.GetLength(1) - 1];
+            for (int posicao = 0; posicao < MatrizFrase.GetLength(1); posicao++) //Salva toda a ultima coluna em um vetor do tipo char
+                teste[posicao] = MatrizFrase[posicao, MatrizFrase.GetLength(1) - 1];
 
             return new string(teste);
         }
@@ -85,11 +112,10 @@ namespace Teste_1___Codificador_e_Descodificador
         #region Atributos
         private string fraseCriptografada;
         private int indiceFrase;
-        private char[,] matrizFrase;
         #endregion
 
         #region Construtores
-        public Decodificacao(string fraseCompleta)
+        public Decodificacao(string fraseCompleta):base()
         {
             //Regex usado para separar os dados frase e indice
             Regex retirandoInformacoes = new Regex(@"\[\'(.*)\',\s?(\d+)\]");
@@ -97,27 +123,35 @@ namespace Teste_1___Codificador_e_Descodificador
 
             fraseCriptografada = encontrados.Groups[1].Value;
             indiceFrase = Convert.ToInt32(encontrados.Groups[2].Value);
-            matrizFrase = new char[fraseCriptografada.Length, fraseCriptografada.Length];
+            base.MatrizFrase = new char[fraseCriptografada.Length, fraseCriptografada.Length];
         }
         #endregion
 
         #region métodos
         public string retornaRespostaDescodificada()
         {
+            criacaoMatriz();
+            return retornaLinha();
+        }
+        protected override void criacaoMatriz()
+        {
             for (int colunas = fraseCriptografada.Length - 1; colunas > -1; colunas--)
             {
                 //Add
                 for (int linha = 0; linha < fraseCriptografada.Length; linha++)
-                    matrizFrase[linha, colunas] = fraseCriptografada[linha];
+                    MatrizFrase[linha, colunas] = fraseCriptografada[linha];
 
                 //Sort
-            }
 
+            }
+        }
+        private string retornaLinha()
+        {
             //Recolhendo a linha com a palavra correta
             char[] palavraCorreta = new char[fraseCriptografada.Length];
             for (int pos = 0; pos < fraseCriptografada.Length; pos++)
             {
-                palavraCorreta[pos] = matrizFrase[indiceFrase, pos];
+                palavraCorreta[pos] = MatrizFrase[indiceFrase, pos];
             }
 
             return new string(palavraCorreta);
