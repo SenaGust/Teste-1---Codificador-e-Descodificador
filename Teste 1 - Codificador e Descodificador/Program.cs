@@ -49,6 +49,29 @@ namespace Teste_1___Codificador_e_Descodificador
             return resposta;
         }
         #endregion
+        #region Segunda Etapa
+        private string retornaUltimaColuna()
+        {
+            char[] teste = new char[matrizFrase.GetLength(0)];
+
+            for (int posicao = 0; posicao < matrizFrase.GetLength(1); posicao++) //Salva toda a ultima coluna em um vetor do tipo char
+                teste[posicao] = matrizFrase[posicao, matrizFrase.GetLength(1) - 1];
+
+            return new string(teste);
+        }
+        public string retornaRespostaCodificada()
+        {
+            int indiceEntrada;
+
+            criacaoMatriz();
+
+            //começa ordenação
+            indiceEntrada = 0;
+
+            //["nomeCodificado", Indice utilizado]
+            return "[\'" + retornaUltimaColuna() + "\', " + indiceEntrada + "]";
+        }
+        #endregion
 
         #endregion
 
