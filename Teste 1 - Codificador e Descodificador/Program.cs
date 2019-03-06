@@ -22,7 +22,27 @@ namespace Teste_1___Codificador_e_Descodificador
         }
         #endregion
     }
-   
+    class Decodificacao
+    {
+        #region Atributos
+        private string fraseCriptografada;
+        private int indiceFrase;
+        private char[,] matrizFrase;
+        #endregion
+
+        #region Construtores
+        public Decodificacao(string fraseCompleta)
+        {
+            //Regex usado para separar os dados frase e indice
+            Regex retirandoInformacoes = new Regex(@"\[\'(.*)\',\s?(\d+)\]");
+            Match encontrados = retirandoInformacoes.Match(fraseCompleta);
+
+            fraseCriptografada = encontrados.Groups[1].Value;
+            indiceFrase = Convert.ToInt32(encontrados.Groups[2].Value);
+            matrizFrase = new char[fraseCriptografada.Length, fraseCriptografada.Length];
+        }
+        #endregion
+    }
     class Program
     {
         static void Main(string[] args)
