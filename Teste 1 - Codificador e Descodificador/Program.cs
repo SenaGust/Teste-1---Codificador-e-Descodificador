@@ -42,6 +42,29 @@ namespace Teste_1___Codificador_e_Descodificador
             matrizFrase = new char[fraseCriptografada.Length, fraseCriptografada.Length];
         }
         #endregion
+
+        #region métodos
+        public string retornaRespostaDescodificada()
+        {
+            for (int colunas = fraseCriptografada.Length - 1; colunas > -1; colunas--)
+            {
+                //Add
+                for (int linha = 0; linha < fraseCriptografada.Length; linha++)
+                    matrizFrase[linha, colunas] = fraseCriptografada[linha];
+
+                //Sort
+            }
+
+            //Recolhendo a linha com a palavra correta
+            char[] palavraCorreta = new char[fraseCriptografada.Length];
+            for (int pos = 0; pos < fraseCriptografada.Length; pos++)
+            {
+                palavraCorreta[pos] = matrizFrase[indiceFrase, pos];
+            }
+
+            return new string(palavraCorreta);
+        }
+        #endregion
     }
     class Program
     {
