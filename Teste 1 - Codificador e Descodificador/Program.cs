@@ -45,11 +45,11 @@ namespace Teste_1___Codificador_e_Descodificador
                 {
                     if (char.ToLower(matrizFrase[linha, 0]) > char.ToLower(matrizFrase[linhaMais1, 0]))
                     {
-                        trocarLinha(linha, linhaMais1, matrizFrase);
+                        trocarLinha(linha, linhaMais1);
                         trocarIndice(linha, linhaMais1, ref ondeEstaPalavraCerta);
                     }
                     else if (char.ToLower(matrizFrase[linha, 0]) == char.ToLower(matrizFrase[linhaMais1, 0]))
-                        Recursivo(linha, linhaMais1, matrizFrase, 0, ref ondeEstaPalavraCerta);
+                        Recursivo(linha, linhaMais1, 0, ref ondeEstaPalavraCerta);
                     #region Não recursivo Comentado
                     //  Não recursivo
                     //    int indice = 1;
@@ -77,11 +77,11 @@ namespace Teste_1___Codificador_e_Descodificador
             }
             else if (char.ToLower(matrizFrase[linha1, indice]) > char.ToLower(matrizFrase[linha2, indice]))
             {
-                trocarLinha(linha1, linha2, matrizFrase);
+                trocarLinha(linha1, linha2);
                 trocarIndice(linha1, linha2, ref ondeEstaPalavraCerta);
             }
             else if (char.ToLower(matrizFrase[linha1, indice]) == char.ToLower(matrizFrase[linha2, indice]))
-                Recursivo(linha1, linha2, matrizFrase, indice + 1, ref ondeEstaPalavraCerta);
+                Recursivo(linha1, linha2, indice + 1, ref ondeEstaPalavraCerta);
 
         }
         private void trocarLinha(int linha1, int linha2)
