@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace Teste_1___Codificador_e_Descodificador
 {
-    class Codificacao
+    class Matriz
+    {
+        #region Métodos
+
+        #endregion
+    }
+    class Codificacao: Matriz
     {
         #region Atributos
         public string frase;
@@ -72,11 +78,9 @@ namespace Teste_1___Codificador_e_Descodificador
             return "[\'" + retornaUltimaColuna() + "\', " + indiceEntrada + "]";
         }
         #endregion
-
         #endregion
-
     }
-    class Decodificacao
+    class Decodificacao: Matriz
     {
         #region Atributos
         private string fraseCriptografada;
