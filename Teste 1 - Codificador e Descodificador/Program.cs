@@ -36,7 +36,7 @@ namespace Teste_1___Codificador_e_Descodificador
 
         #region Métodos
         #region Ordenação
-        public int selectionSort(char[,] matrizFrase)
+        protected int selectionSort()
         {
             int ondeEstaPalavraCerta = 0; //guarda posição do indice de entrada
             for (int linha = 0; linha < matrizFrase.GetLength(0); linha++)
@@ -69,7 +69,7 @@ namespace Teste_1___Codificador_e_Descodificador
             }
             return ondeEstaPalavraCerta;
         }
-        private void Recursivo(int linha1, int linha2, char[,] matrizFrase, int indice, ref int ondeEstaPalavraCerta)
+        private void Recursivo(int linha1, int linha2, int indice, ref int ondeEstaPalavraCerta)
         {
             if (indice > matrizFrase.GetLength(1) - 1)
             {
@@ -84,7 +84,7 @@ namespace Teste_1___Codificador_e_Descodificador
                 Recursivo(linha1, linha2, matrizFrase, indice + 1, ref ondeEstaPalavraCerta);
 
         }
-        private void trocarLinha(int linha1, int linha2, char[,] matrizFrase)
+        private void trocarLinha(int linha1, int linha2)
         {
             for (int coluna = 0; coluna < matrizFrase.GetLength(1); coluna++)
             {
@@ -140,7 +140,7 @@ namespace Teste_1___Codificador_e_Descodificador
             criacaoMatriz();
 
             //começa ordenação
-            indiceEntrada = 0;
+            indiceEntrada = selectionSort();
 
             //["nomeCodificado", Indice utilizado]
             return "[\'" + retornaUltimaColuna() + "\', " + indiceEntrada + "]";
@@ -219,7 +219,7 @@ namespace Teste_1___Codificador_e_Descodificador
                     MatrizFrase[linha, colunas] = fraseCriptografada[linha];
 
                 //Sort
-
+                selectionSort();
             }
         }
         private string retornaLinha()
