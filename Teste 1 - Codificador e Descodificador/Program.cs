@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -216,16 +217,40 @@ namespace Teste_1___Codificador_e_Descodificador
     {
         static void Main(string[] args)
         {
-            testar();
+            int posArquivo;
+            for (posArquivo = 2; File.Exists("encode-"+posArquivo+".in") || File.Exists("decode-" + posArquivo + ".in"); posArquivo++)
+            {
+                StreamReader leituraArquivo;
+                if (File.Exists("encode-" + posArquivo + ".in"))
+                {
+                    leituraArquivo = new StreamReader("encode-" + posArquivo + ".in");
+                    Codificacao encoder = new Codificacao(leituraArquivo.ReadLine());
+                    EscrevendoArquivos(encoder.RetornaRespostaCodificada(), "teste_encode_" + posArquivo + ".out");
+                }
+                else
+                {
+                    leituraArquivo = new StreamReader("decode-" + posArquivo + ".in");
+                    Decodificacao decoder = new Decodificacao(leituraArquivo.ReadLine());
+                    EscrevendoArquivos(decoder.RetornaRespostaDescodificada(), "teste_decode_" + posArquivo + ".out");
+                }
+                leituraArquivo.Close();
+            }
+            Console.WriteLine("Foram Criados {0} arquivos.", posArquivo - 2);
             //fim
             Console.WriteLine("\n\nPressiona qualquer tecla para continuar...");
             Console.ReadKey();
+        }
+        static void EscrevendoArquivos(string resultado, string nomeArquivo)
+        {
+            StreamWriter gravacaoArquivo = new StreamWriter(nomeArquivo);
+            gravacaoArquivo.WriteLine(resultado);
+            gravacaoArquivo.Close();
         }
         static void testar()
         {
             Decodificacao decode;
             Codificacao encode;
-            string teste = "Complete Log Of This Run Can Be Found";
+            string teste = "DECODE";
             string resultadoEncode, resultadoDecode;
 
             encode = new Codificacao(teste);
