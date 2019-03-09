@@ -3,28 +3,28 @@
   <Class Name="Teste_1___Codificador_e_Descodificador.Matriz">
     <Position X="1.75" Y="0.5" Width="5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAQAAAIAAAAAAAAAAAAAIAAAAACAAQAAAAQAgA=</HashCode>
+      <HashCode>AAACAAgAAAAAEAACAAAAAAAAAIAAAAAAABAAAAAEAgA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Teste_1___Codificador_e_Descodificador.Codificacao">
     <Position X="3.75" Y="4.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAIAAAAAAAAAIAACAAAAAAAAABAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAgACAAAAAAAgAAAAAAAAAAgAABAAAAAAAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Teste_1___Codificador_e_Descodificador.Decodificacao">
     <Position X="0.5" Y="4.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAIIAAAAAAAAEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAA4AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Teste_1___Codificador_e_Descodificador.Program">
-    <Position X="7.5" Y="1" Width="2" />
+    <Position X="7.5" Y="1" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAQAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAABAAAQAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
