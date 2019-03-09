@@ -30,7 +30,7 @@ namespace Teste_1___Codificador_e_Descodificador
         }
         public Matriz()
         {
-
+            matrizFrase = null;
         }
         #endregion
 
@@ -39,50 +39,29 @@ namespace Teste_1___Codificador_e_Descodificador
         protected int selectionSort()
         {
             int ondeEstaPalavraCerta = 0; //guarda posição do indice de entrada
-            for (int linha = 0; linha < matrizFrase.GetLength(0); linha++)
-            {
-                for (int linhaMais1 = linha + 1; linhaMais1 < matrizFrase.GetLength(0); linhaMais1++)
-                {
-                    if (char.ToLower(matrizFrase[linha, 0]) > char.ToLower(matrizFrase[linhaMais1, 0]))
-                    {
-                        trocarLinha(linha, linhaMais1);
-                        trocarIndice(linha, linhaMais1, ref ondeEstaPalavraCerta);
-                    }
-                    else if (char.ToLower(matrizFrase[linha, 0]) == char.ToLower(matrizFrase[linhaMais1, 0]))
-                        Recursivo(linha, linhaMais1, 0, ref ondeEstaPalavraCerta);
-                    #region Não recursivo Comentado
-                    //  Não recursivo
-                    //    int indice = 1;
-                    //    do
-                    //    {
-                    //        if (char.ToLower(matrizFrase[linha, indice]) > char.ToLower(matrizFrase[linhaMais1, indice]))
-                    //        {
-                    //            trocarLinha(linha, linhaMais1, matrizFrase);
-                    //            trocarIndice(linha, linhaMais1, ref ondeEstaPalavraCerta);
-                    //        }
-                    //        else
-                    //            indice++;
-                    //    } while (char.ToLower(matrizFrase[linha, indice - 1]) == char.ToLower(matrizFrase[linhaMais1, indice - 1]) && indice < matrizFrase.GetLength(1));
-                    //}
-                    #endregion
-                }
-            }
+            for (int linha = 0; linha < matrizFrase.GetLength(1); linha++)
+                for (int linhaMais1 = linha + 1; linhaMais1 < matrizFrase.GetLength(1); linhaMais1++)
+                    Recursivo2(linha, linhaMais1, 0, ref ondeEstaPalavraCerta);
             return ondeEstaPalavraCerta;
         }
-        private void Recursivo(int linha1, int linha2, int indice, ref int ondeEstaPalavraCerta)
+        private void Recursivo2(int linha1, int linha2, int indice, ref int ondeEstaPalavraCerta)
         {
-            if (indice > matrizFrase.GetLength(1) - 1)
-            {
-                //Base
-            }
-            else if (char.ToLower(matrizFrase[linha1, indice]) > char.ToLower(matrizFrase[linha2, indice]))
-            {
-                trocarLinha(linha1, linha2);
-                trocarIndice(linha1, linha2, ref ondeEstaPalavraCerta);
-            }
-            else if (char.ToLower(matrizFrase[linha1, indice]) == char.ToLower(matrizFrase[linha2, indice]))
-                Recursivo(linha1, linha2, indice + 1, ref ondeEstaPalavraCerta);
-
+            if(indice < matrizFrase.GetLength(1)) //PRIMEIRA BASE - Fim da coluna
+                if (char.ToLower(matrizFrase[linha1, indice]) == char.ToLower(matrizFrase[linha2, indice])) //mesma letra ignorando maiusculo/minusculo?
+                {
+                    if (char.IsUpper(matrizFrase[linha2, indice]) && char.IsLower(matrizFrase[linha1, indice])) //a e A
+                    {
+                        trocarLinha(linha1, linha2);
+                        trocarIndice(linha1, linha2, ref ondeEstaPalavraCerta);
+                    }
+                    else if (matrizFrase[linha1, indice] == matrizFrase[linha2, indice]) //"a e a" ou "A e A"
+                        Recursivo2(linha1, linha2, indice + 1, ref ondeEstaPalavraCerta);
+                }
+                else if (char.ToLower(matrizFrase[linha1, indice]) > char.ToLower(matrizFrase[linha2, indice])) //qual letra vem primeiro
+                {
+                    trocarLinha(linha1, linha2);
+                    trocarIndice(linha1, linha2, ref ondeEstaPalavraCerta);
+                }
         }
         private void trocarLinha(int linha1, int linha2)
         {
@@ -97,7 +76,7 @@ namespace Teste_1___Codificador_e_Descodificador
         {
             if (linha1 == ondeEstaPalavraCerta)
                 ondeEstaPalavraCerta = linha2;
-            else
+            else if (linha2 == ondeEstaPalavraCerta)
                 ondeEstaPalavraCerta = linha1;
         }
         #endregion
@@ -239,7 +218,37 @@ namespace Teste_1___Codificador_e_Descodificador
     {
         static void Main(string[] args)
         {
+            #region Teste
+            Decodificacao decode;
+            Codificacao encode;
+            string teste = "aAAAAaaaAaAaAaAAaAaAaAaAaaAAAaAaAaAaAaAaAaAaAaAaAAaaAaaAaAaAaAAaaAaaAAaaaaAaAaAaAaAaAaA";
+            string resultadoEncode, resultadoDecode;
 
+            encode = new Codificacao(teste);
+            resultadoEncode = encode.retornaRespostaCodificada();
+
+            decode = new Decodificacao(resultadoEncode);
+            resultadoDecode = decode.retornaRespostaDescodificada();
+
+            Console.WriteLine("\n\nResultado");
+            Console.WriteLine(resultadoDecode);
+            Console.WriteLine(resultadoEncode);
+            if (resultadoDecode == teste)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("DEU CERTO PORRA");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("DEU errado");
+            }
+            #endregion
+
+            //fim
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n\nPressiona qualquer tecla para continuar...");
+            Console.ReadKey();
         }
     }
 }
