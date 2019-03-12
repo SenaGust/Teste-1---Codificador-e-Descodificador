@@ -225,16 +225,17 @@ namespace Teste_1___Codificador_e_Descodificador
                 {
                     leituraArquivo = new StreamReader("encode-" + posArquivo + ".in");
                     Codificacao encoder = new Codificacao(leituraArquivo.ReadLine());
-                    EscrevendoArquivos(encoder.RetornaRespostaCodificada(), "teste_encode_" + posArquivo + ".out");
+                    EscrevendoArquivos(encoder.RetornaRespostaCodificada(), "encode-" + posArquivo + ".out");
                 }
                 else
                 {
                     leituraArquivo = new StreamReader("decode-" + posArquivo + ".in");
                     Decodificacao decoder = new Decodificacao(leituraArquivo.ReadLine());
-                    EscrevendoArquivos(decoder.RetornaRespostaDescodificada(), "teste_decode_" + posArquivo + ".out");
+                    EscrevendoArquivos(decoder.RetornaRespostaDescodificada(), "decode-" + posArquivo + ".out");
                 }
                 leituraArquivo.Close();
             }
+            Console.WriteLine("Resultados");
             Console.WriteLine("Foram Criados {0} arquivos.", posArquivo - 2);
             //fim
             Console.WriteLine("\n\nPressiona qualquer tecla para continuar...");
@@ -262,15 +263,16 @@ namespace Teste_1___Codificador_e_Descodificador
             Console.WriteLine("\n\nResultado");
             Console.WriteLine(resultadoDecode);
             Console.WriteLine(resultadoEncode);
+
             if (resultadoDecode == teste)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("DEU CERTO PORRA");
+                Console.WriteLine("DEU CERTO");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("DEU errado");
+                Console.WriteLine("DEU ERRADO");
             }
             
             Console.ForegroundColor = ConsoleColor.White;
